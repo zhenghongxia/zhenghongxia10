@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    
+    #txt{
+        width:100px;
+        height: 50px;
+        border: 1px solid #000;
+    }
+    
+    
+    </style>
+</head>
+<body>
+    <!-- 能拉伸的文本域 -->
+    <!-- <textarea  id="txt" ></textarea> -->
+    <div id="txt">
+        民谣很穷,一把吉他;
+        民谣很富,四海为家;
+        民谣很穷,一把吉他;
+        民谣很富,四海为家;
+        民谣很穷,一把吉他;
+        民谣很富,四海为家;
+    </div>
+    <button id="btn">获取txt的高度</button>
+    <script>
+        btn.onclick = function(){
+            //盒子的可视高度支持padding
+            console.log(txt.clientHeight)
+            //盒子的可视高度(支持padding+border)
+            console.log(txt.offsetHeight)//
+            //被内容撑开的高度,不算边框的
+            console.log(txt.scrollHeight)
+
+        }
+        
+        
+        
+        
+    </script>
+</body>
+</html>

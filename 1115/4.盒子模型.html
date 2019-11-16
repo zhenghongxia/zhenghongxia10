@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+             padding: 50px;
+            background: skyblue; 
+            /* display: none; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" style="width: 150px;"></div>
+
+
+
+    <script>
+        /* 
+        style为行内样式,样式表中的样式,style是获取不出来的
+
+        getComputedStyle: 计算后的样式
+
+        要获取样式表中的样式可以使用
+        
+        getComputedStyle(element).attr
+
+        *注意:
+            这个方法获取的值是带单位的
+
+
+
+        有时候需要隐藏某个元素,但是又要存一个当前元素的尺寸,这个时候使用 getComputedStyle
+
+        下面的属性结果都为不带单位的数字:
+            clienWidth/clientHeight   盒子可视的宽度/高度(支持padding)
+
+            clientLeft/clientTop   左边框和上边框
+
+            offsetWidth/offsetHeight   盒子可视的宽度(支持padding+border)
+            offsetParent  定位父级(元素)
+            offsetLeft/offsetTop  定位父级到当前元素的距离(当前元素的左外边框到定位父级的左内边框的距离)
+
+            scrollHeight被内容撑开的高度,不算边框的
+        
+        */
+        const box = document.getElementById('box');
+        //    box.style.width='200px';
+
+        console.log(box.style.width);
+        console.log(getComputedStyle(box).width)
+        console.log(getComputedStyle(box).height)
+        console.dir(getComputedStyle(box))
+        let {width,height} = getComputedStyle(box);
+        console.log(box.clientWidth); 
+        console.log(box.offsetHeight);
+        console.log(box.clientLeft);
+        console.log(box.clientTop);
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        padding: 100px;
+    }
+    #box{
+        background: red;
+        /* position: relative; */
+    }
+    #box1{
+        background: green;
+        position: relative;
+        border: 50px solid #000;
+    }
+    #box2{
+        background: skyblue;
+        position: absolute;
+        top:150px;
+        border: 50px solid #000;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div id="box2"></div>
+        </div>
+
+ 
+
+    </div>
+<script>
+/* 
+offsetLeft/offsetTop 在实际中(页面复杂的情况下,要慎用,获取的距离是根据定位父级来的)
+
+
+绝对位置才是最稳的一个距离(当前元素到页面顶部的距离)
+
+思路:
+    求得绝对位置,就是把当前元素的所有祖先节点的距离计算一遍,求和即可
+具体实施:
+    1.先定义一个元素(作为当前元素)
+    2.先求当前元素的距离(包含定位距离和边框距离)
+    3.把这次的定位父级变成下一次循环的当前
+
+*/
+console.log(box2.offsetLeft)//当前元素的左外边框到定位父级的左内边框的距离  
+
+
+// let newEle = box2;
+// let l = 0;
+// //用while循环  只要有当前元素就一直循环
+// while(newEle){
+//     //左外边框到左内边框的距离+左边框的距离之和
+//     l+=(newEle.offsetLeft + newEle.clientLeft);
+//     //把本次的定位父级变成,下次循环的当前元素
+//     newEle = newEle.offsetParent;
+// }
+// //循环完的l总距离减去一个box2的左边框的距离
+// l = l - box2.clientLeft;
+// // console.log(l)
+
+class Tools{
+    position(newEle){
+        let l = 0;
+        let t = 0;
+        let c1 = newEle.clientLeft;
+        let ct = newEle.clientTop;
+        while(newEle){
+            // 左外边框到左内边框的距离+左边框的距离之和
+            l+=(newEle.offsetLeft+newEle.clientLeft);
+            // 上外边框到上内边框的距离+上边框的距离之和
+            t +=(newEle.offsetTop+newEle.clientTop);
+           
+            //把本次的定位父级变成,下次循环的当前元素
+            newEle = newEle.offsetParent;
+        }
+        l = l - c1;
+        t = t -  ct;
+        return { l,t}
+    }
+
+
+}
+
+
+let t1 = new Tools;
+let {l,t} = t1.position(box2);
+console.log(l,t);//
+
+</script>
+
+    
+</body>
+</html>
