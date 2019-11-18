@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 50px;
+            background: pink;
+            color: #fff;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        body {
+            height: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">回到顶部</div>
+
+    <script>
+        /**
+    滚轮事件：（当有滚动条时，滚轮即触发事件）
+    onscroll
+
+      */
+        const {
+            offsetTop
+        } = box;
+
+        onscroll = function () {
+            let {
+                scrollTop
+            } = document.documentElement;
+            // 元素的定位距离小于等于滚动条的距离
+            if (offsetTop <= scrollTop) {
+                box.style.position = 'fixed';
+                box.style.top = '50%';
+            } else {
+                box.style.position = 'absolute';
+                box.style.top = '100%';
+            }
+
+        }
+        box.onclick = function () {
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+
+</html>

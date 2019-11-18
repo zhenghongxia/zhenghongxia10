@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            padding: 100px;
+        }
+
+        #box2 {
+            background: pink;
+            position: relative;
+        }
+
+        #box3 {
+            position: absolute;
+            background: orange;
+        }
+    </style>
+</head>
+
+<body style="height:2000px">
+
+    <div>
+        <div id="box2">
+            <div id="box3"></div>
+        </div>
+    </div>
+    <script>
+        /* 
+     DOM:获取可视区的高度
+        网页可见区域宽： document.documentElement.clientWidth  如果有滚动条，要减去滚动条的宽度
+        网页可见区域高： document.documentElement.clientHeight
+    
+        element.getBoundingClientRect() 它返回的是一个对象，这个对象下
+
+     BOM:
+        innerHeight 返回窗口的文档显示区的高度。
+        innerWidth 返回窗口的文档显示区的宽度。如果有滚动条，不减去滚动条的宽度
+
+         window.pageXOffset/window.pageYOffset  滚动条的距离
+     */
+
+        window.onscroll = function () {
+            console.log(window.pageYOffset)
+        }
+    </script>
+</body>
+
+</html>
