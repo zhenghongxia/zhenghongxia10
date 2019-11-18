@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            把下面str中的name，age，say换成obj中的value值
+        */
+        // let obj = {
+        //     name:'小明',
+        //     age:18,
+        //     say:'好好学习，天天向上',
+        // };
+        // let str = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+        // console.log(str.replace(/{(\w+)}/g,function(...arg){
+        //     let [key,value] = arg;
+        //     // console.log(key);
+        //     // console.log(value);
+        //     return obj[value];
+        // }));
+
+        /*
+            计算下面字符串中哪个字符出现的次数最多，出现了几次
+        */
+        let str2 = 'hdd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+        let obj = {};
+        let key = '';
+        let num = 0;
+        let ary = [];
+
+        //原生循环处理
+        // for(let i=0;i<str2.length;i++){
+        //     //判断某个字符在obj中是否已经存在，如果存在则加1，如果没有则直接赋值为1
+        //     // console.log(i);
+        //     // console.log(str2[i]);
+        //     if(!obj[str2[i]]){
+        //         obj[str2[i]] = 1;
+        //     }else{
+        //         obj[str2[i]] += 1;
+        //     }
+        //     // console.log(obj[str2[i]]);
+
+        //     if(obj[str2[i]] > num){
+        //         num = obj[str2[i]];  //出现的次数
+        //         key = str2[i];  //出现的字符
+        //     }
+        //     console.log(num,key);
+        // }
+
+        //正则匹配处理
+        for(let i=0;i<str2.length;i++){
+            //全局查找每次字符出现的次数
+            if(!ary.includes(str2[i])){
+                //匹配规则
+                let re = new RegExp(str2[i],'g');
+                // console.log(re);
+                //匹配字符串中所有相同的字符，匹配到的结果是一个数组，可以拿到某个字符的长度
+                let len = str2.match(re).length;
+                // console.log(str2.match(re));  //拿到同一个字符的所有的
+                obj[len] = str2[i];
+                // console.log(obj);
+                ary.push(str2[i]);
+            }else{
+                continue;
+            }
+        }
+
+        let key2 = Object.keys(obj);  //可以把对象的key拿出来，是个数组
+        let val = Object.values(obj);  //可以把对象的value拿出来，是个数组
+        console.log(key2[key2.length-1],val[val.length-1]);
+    </script>
+</body>
+</html>
