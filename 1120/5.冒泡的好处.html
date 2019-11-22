@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点击创建</button>
+    <ul id='ul'>
+        <li>1</li>
+    </ul>
+    <script>
+     //一个动态获取(getElements系列，children都是动态获取) 一个是静态获取
+     let lis=document.getElementsByTagName('li')
+     let num=1;
+     btn.onclick=function(){
+         ul.innerHTML +='<li>'+(++num)+'</li>'
+     }
+
+    </script>
+</body>
+
+</html>

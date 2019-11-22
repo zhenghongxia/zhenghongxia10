@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <div id="box"></div>
+    <select name="" id="sele">
+        <option value="">北京</option>
+        <option value="">上海</option>
+        <option value="">德州</option>     
+    </select>
+    <input type="text" id='txt' maxlength="10">
+    <span id="span">0</span>/10字
+    <input type="file" id='f'>
+    /*
+    # 事件
+
+    onclick       点击
+    onmouseover   移入
+    onmouseout    移出
+    onload        当静态资源加载完成之后执行函数中的代码
+    onchange      输入框改变之后失焦触发(select改变value值也会触发)
+    oninput       输入内容的时候触发
+    onerror       加载失败
+    onresize      可视区窗口发生变化
+    onscroll      滚动条发生变化
+
+
+    onblur  失焦**表单元素**
+    onfocus 聚焦**表单元素**
+
+    onmousedown  鼠标按下
+    onmouseup    鼠标抬起
+    onmousemove  鼠标滑动
+    onmouseenter 鼠标移入 (没有冒泡，解决了穿透问题)
+    onmouseleave 鼠标移出 (没有冒泡，解决了穿透问题)
+    onmousewheel 滚轮
+
+
+    window.onlod
+
+    img.onload
+
+    [].toString
+    ''.toString
+    {}.toString
+
+```
+
+### 如果没有添加事件，某个元素身上有事件吗？
+
+> 当一个元素创建出来的时候，天生就有事件，只不过事件的默认值为null
+
++ 如果某个元素有这个事件，默认值为null，如果没有这个事件这个事件值为undefined
+
+> 当用户操作页面的时候，浏览器会监听用户的操作行为，当用户触发了某个事件之后，如果对应的事件有事件函数，那么就调用该事件函数，也就是说，就算没有事件函数也会触发事件，没有响应只是因为没有绑定事件函数
+
+```
+    btn.onclick = function(){
+        alert(1);
+    }
+
+    给btn的点击添加一个事件函数
+
+   
+```
+
+### 某个条件成立就叫事件
+
+
+## 事件对象
+    
+    > 当调用事件函数的时候，事件函数的***第一个参数***一定是事件对象
+    > 事件对象记录用户触发事件时的细节信息
+
+    
+</body>
+<script>
+
+    txt.onfocus = function () {
+        console.log(1)
+    }
+    txt.oninput = function () {
+        span.innetText = this.value.length
+    }
+    f.onchange=function(){
+        console.log(1)
+    }
+// 
+
+//解除事件函数 - > 给元素事件赋值 null即可   ->btn.onclick = null;
+</script>
+
+</html>

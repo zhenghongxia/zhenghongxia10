@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /*从里到外*/从里到外
+            div{
+                padding:100px;
+            }
+            #box{
+                background: red;;
+            }
+            #box1{
+                background:slateblue;
+            }
+            #box2{
+                background:teal;
+            }
+            #btn{
+                background:tomato;
+            }
+            </style>
+</head>
+
+<body>
+        <div id="box">
+                <div id="box1">
+                    <div id="box2">
+                        <button id="btn">按钮</button>
+                    </div>
+                </div>
+            </div>
+
+    <script>
+        /*
+        ## 冒泡
+
++ 当触发某个元素事件的时候，如果祖先级节点绑定的事件和触发的事件一致，那么会依次执行
+
++ 从目标元素起，从下往上直到window的过程叫冒泡
+
+- 阻止冒泡 -> *** 目标元素是谁就阻止谁
+    ev.cancelBubble = true  它不是标准，但是所有浏览器都兼容
+    ev.stopPropagation()   它是标准，但是低版本浏览器不兼容
+        */
+    box.onclick=function(){
+        alert('box')
+    }
+    box1.onclick=function(){
+        alert('box1')
+    }
+    box2.onclick=function(){
+        alert('box2')
+    }
+    btn.onclick=function(ev){
+        alert('btn') 
+        //在哪里实行事件，就在那里终止冒泡
+        ev.stopPropagation();//终止冒泡
+        console.log(ev)
+    }
+    window.onclick=function(){
+        alert('window')
+    }
+    
+    
+    
+    
+    
+    </script>
+</body>
+</html>
