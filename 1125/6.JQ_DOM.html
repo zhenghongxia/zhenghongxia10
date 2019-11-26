@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">添加</button>
+
+    <!-- import js -->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        let num = 0;
+        $('#btn').click(function () {
+            let $li = $('<li>' + ++num + '</li>').css({
+                width:30,
+                height:30
+            });
+
+            $li.click(function(){
+                $(this).remove();
+            });
+
+            $('#ul').prepend($li)
+        })
+
+         //边框一个是给ul添加，一个是给li添加
+        // $('#ul').append($li).css('border','1px solid #000');
+
+        // $li.appendTo($('#ul')).css('border','1px solid #000');
+    </script>
+
+
+
+</body>
+
+</html>
