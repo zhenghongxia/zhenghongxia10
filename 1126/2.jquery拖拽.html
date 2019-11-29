@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #shadow {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            opacity: .3;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="box"></div>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $("#box").css({
+            width: 100,
+            height: 100,
+            background: "red",
+            position: "absolute",
+            top: 0,
+            left: 0
+        })
+
+        $("#box").mousedown(function (e) {
+            
+            let $shadow = $("<div id='shadow'></div>");
+            let unalteredX = e.pageX - $(this).offset().left;
+            let unalteredY = e.pageY - $(this).offset().top;
+            $shadow.css({
+                left:$("#box").offset().left,
+                top:$("#box").offset().top
+            })
+           // $shadow位置设置成与$("#box")的位置一样，当下次拖动时，就不会从left:0,top:0开始了,而是从("#box")移动后的位置开始
+            $("#body").append($shadow)
+            $(document).mousemove(function (e) {
+                $shadow.css({
+                    left: e.pageX - unalteredX,
+                    top: e.pageY - unalteredY
+                })
+            })
+            $(document).mouseup(function(){
+                $(this).off("mousemove");
+                $(this).off("mouseup");///清掉自身事件，如果不清掉，这个事件每当mouseup时都会执行
+                $("#box").css({//("#box")的位置覆盖$shadow的位置，并把$shadow移除，形成了类似拖动文件夹的效果
+                    left:$shadow.offset().left,
+                    top:$shadow.offset().top
+                })
+                $shadow.remove()
+            })
+            return false//阻止默认行为与冒泡
+        })
+
+        /*    $("#box").mousedown(function(e){
+               let unalteredX = e.pageX - $(this).offset().left;
+               let unalteredY =e.pageY - $(this).offset().top;
+
+               $(document).mousemove(function(e){
+                   $("#box").css({
+                       left:e.pageX - unalteredX,
+                       top:e.pageY - unalteredY,
+                   })
+               })
+               $(document).mouseup(function(e){
+                   $(document).off("mousemove");
+                   $(document).off("mouseup");
+               })
+           }) */
+    </script>
+</body>
+
+</html>

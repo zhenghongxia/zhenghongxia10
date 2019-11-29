@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style></style>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: lightcoral;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+        onscroll  滚动条改变的时候触发
+        onmousewheel  滚轮事件
+
+            ev.wheelDelta  检测滚动的方向
+                大于0就是向上的
+                小于0就是向下的
+
+        火狐：DOMMouseScroll 
+            注意这个事件只能使用事件绑定的方式去写
+            ev.detail
+                大于0就是向下的
+                小于0就是向上的
+    */
+        let {
+            log
+        } = console;
+        /*  document.onmousewheel = function(ev){
+            log(ev)
+            log(ev.wheelDelta)//上滚为正，下滚为负
+         } */
+
+     /*    window.addEventListener("DOMMouseScroll", function (ev) {
+            log(ev) //
+            if (ev.detail > 0) {
+                console.log('下')
+            } else {
+                console.log('上')
+            }
+        }) */
+
+        function addWheel(obj, callback) {
+          
+            if (obj.onmousewheel === null) {
+                obj.onmousewheel = monitor;
+            } else {
+                obj.addEventListener("DOMMouseScroll", monitor)
+            }
+
+            function monitor(ev) {
+                log(1)
+                let direction = false;
+                if (ev.wheelDelta) {
+                    direction = ev.wheelDelta > 0 ? true : false;
+                } else {
+                    direction = ev.detail < 0 ? true : false
+                }
+                callback.call(this, direction)
+            }
+        }
+        addWheel(box,function(d){
+            let {width,height} = getComputedStyle(this);
+          if(d){
+              this.style.width = parseFloat(width) + 5+"px";
+              this.style.height = parseFloat(height) +5+"px";
+          }else{
+            this.style.width = parseFloat(width) -5+"px";
+              this.style.height = parseFloat(height) -5+"px";
+          }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <button>按钮</button> -->
+        <ul>
+            <!-- <li>1</li>
+        <li>2</li>
+        <li>3</li> -->
+        </ul>
+    </div>
+    <button id="btn">按钮</button>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        /* 1.事件流
+       2.事件种类，作用
+       3.事件对象
+     */
+        $("#box").css({
+            width: 100,
+            height: 100,
+            background: "red"
+        })
+        //hover:onmouseenter+onmouseleave
+        /*  $("#box").hover(function(){
+             $("#box").css({width:100,height:100,background:"green"})
+         },function(){
+             $("#box").css({width:100,height:100,background:"red"})
+         }) */
+        /*   //delegate:事件监听，绑定父元素
+          //delegate(监听元素，事件，事件函数)
+          $("#box").delegate("li","click",function(){
+              console.log($(this).text())
+          })
+         //on方法用处1：绑定事件
+          $("#box").on("mouseenter",function(){
+              console.log("box")
+          })
+          //on方法用处2：事件监听 on(事件，监听元素，事件函数)，绑定父元素
+          $("#box").on("click","li",function(){
+              console.log("li")
+          }) */
+
+        /*  $("#box").mouseover(function(){
+             $(this).css({background:"blue"});
+             $("button").click(function(){
+                 console.log("发送一次请求")
+             })
+
+         })
+         $("#box").mouseout(function(){
+             $(this).css({background:"red"})
+         }) */
+        /* //问题：多次hover会多次绑定事件，触发越多，绑定的也就越多，当触发一次事件函数，就会多次发起请求
+            $("#box").hover(function(){
+                $(this).css({background:"blue"});
+                $("button").click(function(){
+                    console.log("发送一次请求")
+                })
+            },function(){
+                $("#box").css({width:100,height:100,background:"red"})
+            }) 
+        //办法：绑一次，解一次 off()方法
+        $("#box").hover(function(){
+                $(this).css({background:"blue"});
+                $("button").off().click(function(){//解除上一次，再绑定新的
+                    console.log("发送一次请求")
+                })
+            },function(){
+                $("#box").css({width:100,height:100,background:"red"})
+            }) */
+
+        //问题：同一个元素绑定多个相同事件，触发时一个时会都触发到
+        //办法：可以运用off解绑，可以在事件上添加class指定解绑， eg:"click.a",解绑时在off中传入这个class，eg:off("click.a")
+        $("#box").on("click.a", function () {
+            console.log("box")
+        })
+        $("#box").on("click.b", function () {
+            console.log(222)
+        })
+        $("#btn").on("click", function () {
+            $("#box").off("click.a")
+        })
+
+        //on方法用处3：传数据
+        let ary = ["apple", "red", "big"]
+        ary.forEach(item => {
+            let $li = $("<li>" + item + "</li>")
+            $li.on("click", {
+                data: item
+            }, function (e) {
+                console.log("my name is" + e.data.data)
+            })
+            $("ul").append($li)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+      promise：解决异步编程问题，将异步代码转成同步执行
+      promise的参数为一个回调函数，函数有两个参数resolve函数和reject函数（js引擎自带的），resolve必须要有，reject可有可无，resolve和reject执行前，promise的实例状态为pending状态，resolve执行=>成功态（resolved），reject执行=>失败态（rejected），
+      当异步代码执行完，通过异步代码的结果去调用resolve或者reject
+      resolve:异步代码执行成功后调用，resolve执行=>pending =>成功态（resolved）
+      reject:异步代码有可能报错或者错误，如果报错或者错误就执行reject pending=>rejected
+      **注意**：只要resolve或reject执行，他们对应的形态都会凝固，不在改变
+      }
+      **注意**：Promise的回调函数,在实例创建时会立即执行，且是主线程任务，代码同步执行
+      new Promise(function(resolve,reject)=>{
+
+      })
+     */
+    
+    let p = new Promise((resolve,reject)=>{
+        //resolve()//Promise {<resolved>: undefined}
+        //reject()//Promise {<rejected>: undefined}
+    })
+    console.log(p)//resolve和reject执行前状态 Promise {<pending>}
+    
+    let p1 = new Promise((resolve,reject)=>{
+
+    })
+    p1.then(function(){
+
+    })
+   
+    </script>
+</body>
+</html>

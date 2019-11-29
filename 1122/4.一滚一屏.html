@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            overflow: hidden;
+        }
+
+        #list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            list-style: none;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="list"></ul>
+    <script>
+        let ary = ["red", "green", "yellow", "blue", "purple", "pink"]
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+        let str = ary.map((item) => `<li style="width:${w}px;height:${h}px;background:${item}"></li>`).join("");
+        list.innerHTML = str;
+
+        let num = 0;
+        function fn(o){
+        if(o){
+            num --;
+            if(num < 0){
+                num = 0;
+            }
+        }else{
+            num ++;
+            if(num > ary.length-1){
+                num = ary.length-1;
+            }
+        }
+        list.style.top = - num * h + 'px';
+    }
+        addWheel(document,throttle(fn,1000))
+        function addWheel(obj, callback) {
+
+            if (obj.onmousewheel === null) {
+                obj.onmousewheel = monitor;
+            } else {
+                obj.addEventListener("DOMMouseScroll", monitor)
+            }
+
+            function monitor(ev) {
+                let direction = false;
+                if (ev.wheelDelta) {
+                    direction = ev.wheelDelta > 0 ? true : false;
+                } else {
+                    direction = ev.detail < 0 ? true : false
+                }
+                callback.call(this, direction)
+            }
+        }
+        function debounce(callback,time){
+            let timer;
+            return function(...arg){
+                if(timer){
+                    clearTimeout(timer)
+                }
+               timer = setTimeout(()=>{
+                   callback.call(this,...arg)
+               })
+            }
+        }
+        function throttle(callback,time){
+            let preTime = +new Date();
+            return function(...arg){
+                let nowTime = +new Date();
+                if(nowTime - preTime>time){
+                    callback.call(this,...arg)
+                }
+                preTime = nowTime
+            }
+        }
+    </script>
+</body>
+
+</html>

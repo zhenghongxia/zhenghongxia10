@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+      js:单线程，从上到下解读代码
+
+      {js先执行主线程代码，如果主线程有异步代码，比如定时器，promise或者事件，那么会把异步代码放到异步队列，继续执行主线程任务，如果事件条件成立，会把事件放到主线程中执行，当主线程任务执行完后，会到异步队列将异步代码放到主线程中执行，如果异步代码中有微任务和宏任务，那么会先执行微任务，再执行宏任务，这个过程叫做事件循环**注意**：如果宏任务代码中包含着微任务，那么会先执行宏任务，再执行里面的微任务}
+
+       同步：代码自上而下依次执行，如果有代码卡住，下面代码不执行
+
+       异步：代码自上而下依次执行，如果有代码卡住，会继续往下执行
+
+       异步操作不易于维护开发，同步操作利于维护开发
+       解决方法：promise解决异步编程问题，让异步代码同步执行
+       {
+         先执行微任务：
+
+         后执行宏任务：
+       }
+
+       {定时器，所有事件}
+
+       事件调用：把事件交给事件引擎,所有的js事件都是异步执行
+     */
+     let {log} = console;
+     let a = 10;
+    /* (function a(){
+        a = 20;
+        console.log(a)//自执行函数a     匿名自执行函数有变量名，那么在这个自执行函数内，赋值一个相同变量名的值，那么在自执行函数内，这个变量仍是函数本身
+    })() */
+   
+    document.onclick =function (){
+     
+    }
+    setTimeout(()=>{
+        console.log("2s")
+    },2000)
+    setTimeout(()=>{
+        console.log("1s")
+    },1000)
+    a = 20;
+    console.log(a,111)
+
+
+    let p = new Promise((res,rej)=>{
+        setTimeout(()=>{
+            res(5)
+        })
+        //rej(6)
+    })
+    p.then(function(d){
+        console.log(d)
+    },function(e){
+        console.log(e)
+    })
+    </script>
+</body>
+</html>

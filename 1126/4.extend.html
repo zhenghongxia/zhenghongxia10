@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea name="" id="txt"></textarea>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        /* $.extend 用法：
+        1.$.extend(newEle,ele) 浅拷贝 eg：let obj1 = $.extend({},obj)
+        2.$.extend(true,newEle,ele) 深拷贝 eg: let ary1 = $.extend(true,[],ary)
+        3.扩展插件使用，extend里面写个对象，对象的属性就是添加的方法名，值就是函数
+    
+     */
+
+        $.extend({
+            trimLeft: function (str) {
+                return str.replace(/^\s+/, '');
+            }
+        });
+        console.log($.trimLeft('   12345'));//去掉空格后的 '12345'
+        $.fn.extend({
+            scrollH:function(){
+                return this[0].scrollHeight
+            }
+        })
+        console.log($.extend)
+        console.log($.fn)
+        console.log($.fn.extend)
+        $(document).click(function(){
+        // console.log($('#txt').height())
+        // console.log($('#txt').innerHeight())
+        console.log($('#txt').scrollH());
+    });
+    </script>
+</body>
+
+</html>

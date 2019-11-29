@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: lightcoral;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    let e =0;
+    let obj = {};
+    document.onkeydown = function (ev){
+        e = ev.keyCode;
+        console.log(e)
+        obj[e] = true;
+        if(!timer){
+            timer = setInterval(fn,16.7)
+        }
+    }
+    
+    let fn = ()=>{
+        if(obj["38"]){
+          box.style.top = box.offsetTop - 5 +"px";
+        }
+        if(obj["40"]){
+          box.style.top = box.offsetTop + 5 +"px";
+        }
+        if(obj["37"]){
+          box.style.left = box.offsetLeft - 5+"px";
+        }
+        if(obj["39"]){
+          box.style.left = box.offsetLeft + 5 +"px";
+        }
+    }
+    timer = setInterval(fn,16.7);
+
+    document.onkeyup = function(ev){
+      obj[ev.keyCode] = false;
+      if(Object.values(obj).every((item)=>!item)){
+          clearInterval(timer);
+          timer = null;
+      }
+
+      
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+        list-style: none;
+    }
+    #ul {
+        width:100px;
+        border:1px solid hotpink;
+        display: none;
+        position:absolute;
+        top:0;
+        left:0;
+    }
+    
+    #ul li{
+        height:20px;
+        line-height: 20px;
+        text-align: center;
+        border-bottom:1px dashed plum;
+    }
+    #ul li:hover{
+        background: hotpink;
+        color:#fff;
+    }</style>
+</head>
+
+<body>
+    <input type="text" name="" id="txt">
+    <img src="./11-22/0.jpg" alt="" id="img">
+    <a href="http://www.baidu.com" id="a">去百度</a>
+    <ul id="ul">
+        <li>我的帖子</li>
+        <li>我的收藏</li>
+        <li>我的关注</li>
+    </ul>
+    <script>
+        /* 事件默认行为：浏览器做的，不是人为的
+      
+         要阻止浏览器默认行为得知道是什么事件触发的这种行为
+      
+      */
+
+        document.onkeydown = function (ev) {
+            console.log(ev.keyCode)
+            if (ev.keyCode === 32) {
+                // console.log(ev);
+                ev.returnValue = false; //阻止空格键使用
+                // return false;
+            } 
+           // return false; //全部阻止
+        }
+        txt.onkeydown = function (ev) {
+            console.log(1);
+            ev.cancelBubble = true; //通过冒泡行为,document的空格键可以使用了
+        }
+        img.onmousedown = function (ev) {
+           // ev.returnValue = false //阻止图片可以拖动的行为
+           return false//阻止图片可以拖动的行为
+           ev.stopPropagation();//阻止图片可以拖动的行为
+            //ev.preventDefault()///阻止图片可以拖动的行为
+        }
+        a.onclick = function(ev){
+           // ev.returnValue = false//阻止跳转
+           ev.preventDefault()//阻止跳转
+          //return false//阻止跳转
+        }
+        //阻止鼠标右键默认行为
+        document.oncontextmenu = function (ev){
+            ul.style.cssText = `display:block;top:${ev.clientY}px;left:${ev.clientX}px`;
+           ev.returnValue = false;
+        }
+        ul.onclick = function (ev){
+            ev.stopPropagation()
+        }
+        document.onclick = function(){
+            ul.style.display = "none"
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+      promise中的回调函数为主线程任务，会同步执行，then方法中的回调函数为异步微任务，resolve或reject执行，会放到等待池中的微任务队列，
+     */
+
+
+        let {
+            log
+        } = console;
+        //1 2 3 4 5 6 
+        let p = new Promise((resolve, reject) => {
+            log(1)
+            resolve()
+            let p1 = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(5)
+                    resolve(6)
+                }, 1000)
+            })
+            p1.then(function (y) {
+                log(y)
+            })
+        })
+        p.then(function (x) {
+            console.log(3)
+        })
+        setTimeout(() => {
+            console.log(4)
+        },10)
+        log(2)
+       /* 
+        代码自上而下执行
+        第一步：预解析，赋值
+        第二步：log(1), resolve(),p的then方法中的代码为异步微任务，放到等待队列中的微任务队列，p1实例中setTimeout(1000s)异步宏任务放到等待池中的宏任务队列，
+        第三步：setTimeout(10s)异步宏任务放到等待池中的宏任务队列
+        第四步：log(2)
+       
+        主线程执行完毕，将等待池中的微任务先执行，p的then中函数执行，输出3，微任务完成，执行宏任务setTimeout(1000s)与setTimeout(10s)相比，后者时间先到，输出4，再执行setTimeout(1000s)，输出5，resolve执行，p1的then中代码放入微任务等待池，继续执行，只有这一个任务还未执行，那么最后输出6
+       1 2 3 4 5 6
+        */
+    </script>
+</body>
+
+</html>

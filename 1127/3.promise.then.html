@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+       Promise的实例对象都有一个then方法，可进行链式调用；
+       then方法：
+       1.参数为两个回调函数，分别对应实例的resolve和reject，resolve和reject的参数分别是实例第一个then中两个回调函数的形参接收值,而回调函数的返回值会作为参数传给下一个then中的回调函数
+       2.then方法返回的是一个新的Promise实例，新promise实例的状态默认为成功态,
+
+       **注意**：如果then方法中的回调函数返回一个promise的实例，那么再次链式调用then时，回调函数的执行会受这个函数返回的的实例的状态影响,且回调函数的参数也是这个实例的resolve或reject的参数
+       3.then方法中的函数是异步微任务
+       
+     */
+    let {log} = console;
+    let p = new Promise((resolve,reject)=>{
+       // resolve(1)
+       reject(2)
+    })
+    
+    p.then(function(x){
+      log(x)
+    },function(y){
+      log(y)//2
+      return "name"
+    }).then(function(z){
+        console.log(z);
+        return new Promise((resolve,reject)=>{
+            resolve(1)
+        })
+    }).then(function(g){
+       console.log(g)
+    })
+    
+    
+    </script>
+</body>
+</html>
