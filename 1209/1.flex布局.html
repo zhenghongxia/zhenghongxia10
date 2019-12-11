@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="font_/iconfont.css" />
+    <style>
+        #list {
+            list-style: none;
+            width: 250px;
+            height: 400px;
+            /* margin: 10 auto; */
+            background: rgb(24, 24, 23);
+            display: flex;
+            /* 主轴排列方向：column（y轴）/row（x轴） */
+            flex-direction: column;
+            /* justify-content（子元素如何排列）：space-evenly（子元素等分空间）  */
+            /* justify-content: space-evenly; */
+        }
+
+        #list li {
+            width: 150px;
+            height: 30px;
+            margin-top: 30px;
+            background: lightseagreen;
+            display: flex;
+            flex-direction: row;
+            /*align-items属性定义项目在交叉轴上如何对齐：子元素垂直居中 */
+            align-items: center;
+        }
+
+        #list li i:nth-of-type(1) {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            /* background: chocolate; */
+            margin-left: 10px;
+        }
+
+        #list li i:nth-of-type(2) {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            /* background: rgb(30, 210, 120); */
+            margin-left: 5px;
+        }
+
+        #list span {
+            width: 80px;
+            height: 20px;
+            line-height: 20px;
+            /* background: cornsilk; */
+            margin-left: 10px;
+        }
+
+        #nav {
+            width: 100%;
+            height: 40px;
+            background: rgb(34, 32, 31);
+            color: cornsilk;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #nav ul {
+            width: 500px;
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #nav ul i {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            margin-right: 10px;
+        }
+
+        #nav ul:nth-of-type(1) {
+            margin-left: 10px;
+        }
+
+        #nav ul:nth-of-type(2) {
+            margin-right: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <ul>
+            <li><i class="iconfont icon-xiazaichenggong"></i><span>云中心</span></li>
+            <li><i class="iconfont icon-download-01"></i><span>下载</span></li>
+            <li><i class="iconfont icon-zhongmingming"></i><span>便利贴</span></li>
+            <li><i class="iconfont icon-fenxiang"></i><span></span>分享</li>
+        </ul>
+        <ul>
+            <li><i class="iconfont icon-shanchu"></i><span>删除</span></li>
+            <li><i class="iconfont icon-arrLeft-fill"></i><span>向上</span></li>
+            <li><i class="iconfont icon-wenjianjia"></i><span>文件夹</span></li>
+            <li><i class="iconfont icon-yishoucang"></i><span>收藏</span></li>
+            <li><i class="iconfont icon-yemian"></i><span>首页</span></li>
+        </ul>
+    </nav>
+    <ul id="list">
+        <li><i class="iconfont icon-geren"></i><span>个人中心</span><i class="iconfont icon-arrLeft"></i></li>
+        <li><i class="iconfont icon-cloud-move"></i><span>移动</span><i class="iconfont icon-arrLeft"></i></li>
+        <li><i class="iconfont icon-guanli"></i><span>管理</span><i class="iconfont icon-arrLeft"></i></li>
+        <li><i class="iconfont icon-wendang"></i><span>文档中心</span><i class="iconfont icon-arrLeft"></i></li>
+        <li><i class="iconfont icon-music"></i><span>我的音乐</span><i class="iconfont icon-arrLeft"></i></li>
+        <li><i class="iconfont icon-f14"></i><span>刷新</span><i class="iconfont icon-arrLeft"></i></li>
+    </ul>
+    <script>
+        /* flex:弹性盒子 任何一个容器都可以指定为Flex布局。行内元素也可以使用Flex布局（  display: inline-flex;）。
+   
+   设置：display：flex
+   设置在父元素的属性：
+      1.主轴排列方向：flex-direction：
+         row（默认）/row-reverse(起点在右端), 纵向（x轴）
+         column/column-reverse(起点在下沿) 横向（y轴）
+
+      2.是否让子元素折行：flex-wrap：
+         nowrap（默认）：不换行。
+         wrap：换行，第一行在上方。
+         wrap-reverse：换行，第一行在下方。
+
+      3.flex-flow:flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
+
+      4.子元素在主轴上的对齐方式 ：justify-content
+          flex-start（默认）左对齐
+          flex-end 右对齐
+          center    垂直居中
+          space-between 两端对齐，项目之间的间隔都相等
+          space-around 每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
+          space-evenly 项目等分父元素空间
+
+      5.子元素在交叉轴上如何对齐： align-items 
+          flex-start：交叉轴的起点对齐
+          flex-end：交叉轴的终点对齐
+          center：交叉轴的中点对齐。
+          baseline: 项目的第一行文字的基线对齐
+          stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+
+      6.多根轴线的对齐方式：align-content如果项目只有一根轴线，该属性不起作用
+         flex-start：与交叉轴的起点对齐。
+         flex-end：与交叉轴的终点对齐
+         center：与交叉轴的中点对齐。
+         space-between：与交叉轴两端对齐，轴线之间的间隔平均分布
+         space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+         stretch（默认值）：轴线占满整个交叉轴。
+
+    设置在子元素上的属性
+      1.项目的排列顺序：order：num  数值越小，排列越靠前，默认为0。
+      
+      2.项目的放大比例：flex-grow默认为0，即如果存在剩余空间，也不放大
+      如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
+
+      3.项目的缩小比例：flex-shrink默认为1，即如果空间不足，该项目将缩小
+      如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。
+
+
+
+
+
+
+
+
+
+
+ */
+    </script>
+</body>
+
+</html>

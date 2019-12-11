@@ -1,0 +1,162 @@
+main {
+    max-width: 750px;
+    min-width: 320px;
+    margin: 0 auto;
+    background: lemonchiffon;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    left:0;
+    top:5px;
+}
+
+.search {
+    max-width: 540px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.search_box {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 20px;
+    flex:1;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    color: darkgray;
+}
+.search_box i{
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    margin-left: 20px;
+    background: url("./flex携程/img/home.png") no-repeat 0 3px;
+    background-size: cover;
+}
+.self {
+    margin-right: 15px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+.self span:nth-child(1){
+    width: 20px;
+    height: 20px;
+    background: url("./flex携程/img/home.png")   no-repeat 0 -34px;
+    background-size: cover;
+}
+.self span:nth-child(2){
+    color: white;
+}
+.swiper{
+    height: 250px;
+    background: url(./flex携程/img/z.jpg) no-repeat 0 0;
+    background-size: cover;
+}
+.list{
+    width: 90%;
+    height: 65px;
+    margin: -30px auto;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: white;
+    box-shadow: 0px 1px 3px #ccc;
+}
+.list li a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.list li a span:nth-child(1){
+    width: 40px;
+    height: 40px;
+}
+.list li a span:nth-child(2){
+    font-size: 14px;
+}
+.list li:nth-child(1) span:nth-of-type(1){
+    background: url(./flex携程/img/nav.png) no-repeat 0 0;
+    background-size:cover;
+}
+.list li:nth-child(2) span:nth-of-type(1){
+    background: url(./flex携程/img/nav.png) no-repeat 0 0;
+    background-position: 0 -40px;
+    background-size:cover;
+}
+.list li:nth-child(3) span:nth-of-type(1){
+    background: url(./flex携程/img/nav.png) no-repeat 0 0;
+    background-position: 0 -80px;
+    background-size:cover;
+}
+.list li:nth-child(4) span:nth-of-type(1){
+    background: url(./flex携程/img/nav.png) no-repeat 0 0;
+    background-position: 0 -120px;
+    background-size:cover;
+}
+.list li:nth-child(5) span:nth-of-type(1){
+    background: url(./flex携程/img/nav.png) no-repeat 0 0;
+    background-position: 0 -160px;
+    background-size:cover;
+}
+
+.nav_list{
+    width: 90%;
+    margin: 0 auto;
+    height: 190px;
+    margin-top: 40px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: rgb(245, 231, 83);
+}
+.nav_list li{
+    height: 62px;
+    display: flex;
+    align-items: center;
+    background: peru;
+}
+.nav_list li a{
+    height: 62px;
+    color: white ;
+    line-height: 62px;
+    text-align: center;
+}
+
+.nav_list li a:nth-of-type(1){
+    border-left: 1px solid white;
+    flex: 1.5;
+    /* background: cornflowerblue; */
+    
+}
+.nav_list li:nth-of-type(1) a:nth-of-type(3){
+    flex: 2;
+    /* background: crimson; */
+}
+.nav_list li:nth-of-type(1){
+   
+    background: linear-gradient(to right,#fa5956,#fb8650 54%);
+}
+.nav_list li a:nth-of-type(2){
+    flex: 1;
+}
+.nav_list li a:nth-of-type(3){
+    flex: 1;
+}
+.nav_list li a:nth-of-type(4){
+    flex: 1;
+}
