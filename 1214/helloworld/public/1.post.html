@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    注册用户名：<input type="text" name="" id="user"><br>
+    注册密码：<input type="password" name="" id="pw">
+    <script>
+        // 把对象转换成QueryUrlParmas格式
+        /*
+                let obj = {
+                    name: 'apple',
+                    pw: 1234,
+                    age: 10
+                }
+                let newObj = new URLSearchParams(obj)
+                 console.log('' + newObj) //name=apple&pw=1234&age=10
+                let str = `name=apple&pw=1234&age=10`
+                let p = new URLSearchParams(str);
+                let searchParams = new URLSearchParams(str);
+
+                for (let p of searchParams) {
+                    console.log(p); // ["name", "apple"]["pw", "1234"] ["age", "10"]
+                    
+                
+                }
+                console.log(new URLSearchParams(str)) */
+
+        /*  fetch('/post',{
+            method:'post',
+            body:''+new URLSearchParams({
+                user:this.value
+            }),
+            headers:{
+                'content-type':'application/x-www-form-urlencoded'
+            }
+        }).then(d=>d.json()).then(d=>{
+            console.log(d);
+        }) */
+        user.onblur = function () {
+          fetch("/post",{
+              method:"post",
+              body:""+new URLSearchParams({
+                  user:this.value
+              }),
+              headers:{
+                  "content-type":"application/x-www-form-urlencoded"
+              }
+          }).then(d=>d.json()).then(d=>{
+              console.log(d)
+          })
+        }
+    </script>
+</body>
+
+</html>

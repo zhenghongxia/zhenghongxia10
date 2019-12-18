@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    注册的用户名:<input id="user" type="text" /><span id="s"></span> </br>
+    注册的密码:<input type="password" id="pw" />
+    <script>
+        user.onblur = function () {
+            ajax('/post', {
+                success(d) {
+                    console.log(d)
+                },
+            }, {
+                body: "user=" + this.value,
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                method: 'post',
+                timeout: 3000,
+                ontimeout() {
+                    console.log('你超时了');
+                }
+            })
+        }
+
+
+
+        function ajax(url, cb, obj) {
+            //如果obj没有传参,那么myObj就为undefined
+            var myObj = obj && {
+                //如果没有指定获取数据方法,默认为get
+                method: obj.method || "get",
+                //如果未设置body,默认为空字符串
+                body: obj.body || "",
+                //如果未配置headers,默认为空对象
+                headers: obj.headers || {},
+                //如果未设置数据格式,默认为json
+                dataType: obj.dataType || "json",
+                //如果未设置超时时间,默认10000ms
+                timeout: obj.timeout || 10000,
+                //如果未定义超时触发的事件函数,默认走function
+                ontimeout: obj.ontimeout || function () {},
+                //如果未设置同异步,默认为true异步
+                async: (obj.async === undefined) ? true : obj.async
+            }
+
+            var len = arguments.length; //通过参数的长度,判断是否有配置项,如果没有配置项直接走get,如果有配置项,再具体判断是get还是post
+
+            var xhr = new XMLHttpRequest;
+            if (obj.async === true) {
+                xhr.timeout = myObj.timeout //设置超时时间
+                xhr.ontimeout = myObj.ontimeout //监听超时
+            }
+
+            function ready() {
+                if (myObj.async === true) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && /(20[0-7])|(30[14])/.test(xhr.status)) {
+                            if (myObj.dataType === "json") {
+                                //cb为一个对象,成功时执行成功的函数,失败时执行失败时的函数
+                                cb.success && cb.success(eval("(" //将json 格式的字符串转换成对象,JSON.parse,低版本不支持
+                                    +
+                                    xhr.responseText + ")"))
+                            } else if (myObj.dataType === "xml") {
+                                cb.success && cb.success(xhr.responseXML)
+                            }
+                        } else {
+                            cb.error && cb.error(xhr.status)
+                        }
+                    }
+                } else {
+                    if (/(20[0-7])|(30[14])/.test(xhr.status)) {
+                        if (myObj.dataType === "json") {
+                            cb.success && cb.success(eval("(" + xhr.responseText + ")"))
+                        } else if (myObj.dataType === "xml") {
+                            cb.success && cb.success(xhr.responseXML)
+                        }
+                    } else {
+                        cb.error && cb.error(xhr.status)
+                    }
+                }
+            }
+
+            if (len === 2) { //参数长度为2时直接走get
+                xhr.open('get', url, true);
+                ready();
+                xhr.send();
+            } else if (len === 3) {
+                if (/^get$/i.test(myObj.method)) {
+                    //如果有配置body(参数),就在url后面拼接
+                    url = myObj.body ? url + "?" + myObj.body : url;
+                    xhr.open('get', url + "myRandom" + Date.now(), myObj.async);
+                    ready();
+                    xhr.send()
+                } else if (/^post$/i.test(myObj.method)) {
+                    xhr.open("post", url, myObj.async);
+                    for (let attr in myObj.headers) {
+                        if (myObj.headers.hasOwnProperty(attr)) {
+                            //设置请求头
+                            xhr.setRequestHeader(attr, myObj.headers[attr])
+                        }
+                    }
+                    ready();
+                    xhr.send(myObj.body)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

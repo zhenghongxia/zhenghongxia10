@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名:<input id="user" type="text"/> </br><span id="s"></span>
+    注册的密码:<input type="password" id="pw"/>
+    <script>
+    user.onblur = function(){
+        //1.生成ajax实例
+        let xhr = new XMLHttpRequest;
+        //2.打开一个路径
+        xhr.open("post","/post",true);
+        //3.设置请求头
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        //4.发送请求，并在请求时设置参数
+        xhr.send("user="+this.value);
+        //5.数据请求完毕,得到响应值
+        xhr.onload = function(){
+            console.log(xhr.responseText)//得到的是JSON字符串
+            console.log(JSON.parse(xhr.responseText))
+        }
+
+    }
+    
+    </script>
+</body>
+</html>

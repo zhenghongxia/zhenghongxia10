@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名:<input id="user" type="text"/> </br>
+    注册的密码:<input type="password" id="pw"/>
+    <button id="btn">提交</button>
+    <script>
+     user.onblur = function(){
+         //1.创建一个ajax实例
+         let xhr = new XMLHttpRequest;
+         //2.请求方式，get方式打开一个路径，路径后面?设置参数
+         xhr.open("get","/get?user="+this.value,true);
+         //3.发送请求
+         xhr.send();
+         //4.数据请求完毕,得到响应值
+         xhr.onload = function(){
+             let d = xhr.responseText;
+             console.log(d)
+         }
+
+     }
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="txt">
+    <button id="btn">json字符串转对象</button>
+    <script>
+        btn.onclick = function () {
+            let val = txt.value;
+            if (/href|src|style|location/.test(val)) {
+                alert('早知道你想搞事情')
+            } else {
+                console.log(eval(`(${txt.value})`));
+            }
+
+        }
+        let val1 = "1",val2="+",val3="2"
+        console.log(new Function('a,b', 'return a+b')(1, 2));
+        console.log(eval(val1 + val2 + val3));//尽量把能够转成js运行的代码尽量转了
+        let json = '{"name":"apple"}'
+        console.log(eval("("+json+")"))
+    </script>
+</body>
+
+</html>

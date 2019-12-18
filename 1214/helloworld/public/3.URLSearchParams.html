@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- axios数据格式 json格式-->
+    <img src="../axios数据格式.png" alt="">
+    <img src="../axios数据格式2.png" alt="">
+    <!-- ajax数据格式 -->
+    <img src="../ajax数据格式.png" alt="">
+    <img src="../ajax数据格式2.png" alt="">
+    注册用户名：<input type="text" name="" id="user">
+    <script>
+        user.onblur = function () {
+            fetch("/get?user" + this.value).then(d => d.json()).then(d => {
+                console.log(d)
+            })
+        }
+
+        /* 
+     URLSearchParams:构造函数，用来处理url（路径地址）中的查询字符串
+     https://www.baidu.com/s?wd=url-search-params-polyfill&rsv_spt=1
+     
+    问号后面的参数
+
+     使用场景：场景一 获取浏览器地址参数
+     let url = new URL("https://www.baidu.com/wd=url-search-params-polyfill&rsv_spt=1");
+     let params = new URLSearchParams(url.search.slice(1))
+        console.log(params) //URLSearchParams {}
+        console.log(params.toString())
+
+      使用场景：场景二 使用URLSearchParams处理axios发送的数据
+      在我们使用axios和fetch来替换之前的ajax进行数据请求时，我们会遇到数据格式不一致的问题
+         let params = new URLSearchParams();
+         params.append('name', 'li lei');
+         params.append('age', 18);
+
+        axios({
+           method: 'post',
+           url: '/test',
+           data: params
+         })
+     */
+
+
+    
+        //创建一个实例
+
+        let u = new URLSearchParams();
+
+        //1.append(name, value):插入一个指定的键/值对作为新的搜索参数。其中name是需要插入搜索参数的键名， value是需要插入搜索参数的对应值。
+
+        let url = new URL("https://www.baidu.com/s?wd=url-search-params-polyfill&rsv_spt=1");
+        console.log(url.search.slice(1)) //wd=url-search-params-polyfill&rsv_spt=1
+        let params = new URLSearchParams(url.search.slice(1))
+        console.log(params) //URLSearchParams {}
+        params.append("name", "apple")
+        console.log(params.toString()) //wd=url-search-params-polyfill&rsv_spt=1&name=apple
+        params.append("name", "apple")
+        console.log(params.toString()) //rsv_spt=1&name=apple&name=apple&name=apple,可以多次添加相同值
+
+        //2/delete(name):从搜索参数列表里删除指定的搜索参数及其对应的值。name是需要删除的键值名称。
+
+        params.delete("wd")
+        console.log(params.toString()) //rsv_spt=1&name=apple
+        params.append("name", "orange")
+        params.append("age", 10)
+        console.log(params.toString()) //rsv_spt=1&name=apple&name=apple&name=orange
+
+        //3.get(name):获取指定搜索参数的第一个值。name是将要返回的参数的键名。返回一个USVString；如果没有，则返回null。
+        console.log(params.get("name")) //apple
+        console.log(params.get("foo")) //null
+
+        //4.getAll(name):获取指定搜索参数的所有值，返回是一个数组。name是返回的参数的名称。
+        console.log(params.getAll("name")) //["apple", "apple", "orange"]
+
+        //5.has(name):返回 Boolean 判断是否存在此搜索参数。name 是我们要查询的参数的键名。
+        console.log(params.has("name")) //true
+        console.log(params.has("foo")) //false
+
+        //6.entries():返回一个iterator可以遍历所有键/值对的对象。
+        console.log(params.entries()) //Iterator {}
+        for (let obj of params.entries()) {
+            console.log(obj) /* (2) ["rsv_spt", "1"]["name", "apple"]["name", "apple"]["name", "orange"] */
+            console.log(obj[0] + "," + obj[1]) //name,apple name,apple name,orange
+        }
+
+        //7.keys():返回iterator 此对象包含了键/值对的所有键名。
+        for (let key of params.keys()) {
+            console.log(key) // name name name age
+        }
+
+        //8.values():返回iterator 此对象包含了键/值对的所有值。
+        for (let value of params.values()) {
+            console.log(value) // apple apple orange '10'
+        }
+
+        //9.set(name, value):设置一个搜索参数的新值，假如原来有多个值将删除其他所有的值。其中name是需要插入修改参数的键名，value是需要插入搜索参数的新值。
+
+        params.set("name", "Tom")
+        console.log(params.toString()) //rsv_spt=1&name=Tom&age=10
+
+        //10.sort(): 按键名排序。
+        params.sort()
+        console.log(params.toString()) //age=10&name=Tom&rsv_spt=1
+        let sParams = new URLSearchParams("c=4&a=2&b=3&a=1");
+        sParams.sort()
+        console.log(sParams.toString()) //a=2&a=1&b=3&c=4
+
+        //11.toString():返回搜索参数组成的字符串，可直接使用在URL上。
+    </script>
+</body>
+
+</html>

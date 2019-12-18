@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名:<input id="user" type="text"/> </br><span id="s"></span>
+    注册的密码:<input type="password" id="pw"/>
+</body>
+<script>
+  let reg = new RegExp(/^[a-zA-Z][\w-]{5,7}/)
+  user.onfocus = function(){
+      user.style.border = "1px solid black"
+  }
+  user.onblur = function(){
+      let val = this.value.trim();
+      if(val&&reg.test(val)){
+          let xhr = new XMLHttpRequest;
+          xhr.open("get","/get?user="+this.value,true);
+          xhr.send();
+          xhr.onload = function(){
+              //得到的xhr.responseText是JSON格式的字符串，需要转成对象
+              let d= JSON.parse(xhr.responseText);
+              if(d.code===0){
+                  console.log(d)
+                  user.style.border = "1px solid red"
+              }else if(d.code===1){
+                console.log(d)
+                  user.style.border = "1px solid blue"
+              }
+          }
+      }else{
+          s.innerHTML="请输入正确格式";
+          user.style.border = '1px solid red';
+      }
+  }
+
+</script>
+</html>

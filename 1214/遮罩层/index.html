@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            width: 1000px;
+            height: 250px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        li {
+            width: 200px;
+            height: 250px;
+            margin-right: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mask {
+            width: 200px;
+            height: 250px;
+            position: absolute;
+            background: black;
+            opacity: .5;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="box">
+            <img src="./img/d.jpg" alt="">
+            <div class="mask" ></div>
+        </li>
+        <li><img src="./img/f.jpg" alt="">
+            <div class="mask"></div>
+        </li>
+        <li><img src="./img/s.jpg" alt="">
+            <div class="mask"></div>
+        </li>
+    </ul>
+</body>
+<script src="./jquery.min.js"></script>
+<script>
+    let $box = $("li");
+    $box.each((i, item) => {
+        $(item).on("mouseenter mouseleave", function (e) {
+            let $mask =$(this).find (".mask");
+            let w = $(this).width();
+            let h = $(this).height();
+            let x = (e.pageX - this.offsetLeft - (w / 2)) * (w > h ? (h / w) : 1);
+            let y = (e.pageY - this.offsetTop - (h / 2)) * (h > w ? (w / h) : 1);
+            let direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+            // console.log((Math.atan2(y, x)))
+            // console.log((180 / Math.PI))
+            // console.log((Math.atan2(y, x) * (180 / Math.PI)))
+            // console.log((Math.atan2(y, x) * (180 / Math.PI))+180)
+            // console.log(((Math.atan2(y, x) * (180 / Math.PI))+180)/90)
+            //console.log(direction)//0上方 1右方 2下方 3左方
+            let eventType = e.type;
+            let type = e.type
+            if(type==="mouseenter"){
+               switch(direction){
+                   case 0:
+                   $mask.css({left:"0px",top:"-250px",display:"block"});
+                   $mask.animate({left:"0px",top:"0px"});
+                   break;
+                   case 1:
+                   $mask.css({left:"200px",top:"0px",display:"block"});
+                   $mask.animate({left:"0px",top:"0px"});
+                   break;
+                   case 2:
+                   $mask.css({left:"0px",top:"250px",display:"block"});
+                   $mask.animate({left:"0px",top:"0px"});
+                   break;
+                   case 3:
+                   $mask.css({left:"-200px",top:"0px",display:"block"});
+                   $mask.animate({left:"0px",top:"0px"});
+                   break;
+               }
+               return false;
+            }else if(type==="mouseleave"){
+                switch(direction){
+                   case 0:
+                   $mask.animate({left:"0px",top:"-250px"});
+                   break;
+                   case 1:
+                   $mask.animate({left:"200px",top:"0px"});
+                   break;
+                   case 2:
+                   $mask.animate({left:"0px",top:"250px"});
+                   break;
+                   case 3:
+                   $mask.animate({left:"-200px",top:"0px"});
+                   break;
+               }
+               return false;
+            }
+        })
+    })
+</script>
+
+</html>

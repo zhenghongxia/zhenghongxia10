@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let url = new URL("https://www.baidu.com/s?wd=url-search-params-polyfill&rsv_spt=1");
+        // console.log(url)
+        /* hash: ""
+        host: "www.baidu.com"
+        hostname: "www.baidu.com"
+        href: "https://www.baidu.com/s?wd=url-search-params-polyfill&rsv_spt=1"
+        origin: "https://www.baidu.com"
+        password: ""
+        pathname: "/s"
+        port: ""
+        protocol: "https:"
+        search: "?wd=url-search-params-polyfill&rsv_spt=1"
+        searchParams: URLSearchParams {}
+        username: "" */
+
+        var xhr = new XMLHttpRequest();    
+
+        xhr.open("get","/get",true);
+        xhr.onreadystatechange = function(){
+            console.log(xhr.readyState)
+        }  
+        xhr.send()
+       
+    </script>
+</body>
+
+</html>
